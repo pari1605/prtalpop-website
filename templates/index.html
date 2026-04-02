@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO BANNER -->
+
+<div class="occasion-section">
+
+    <h2 class="occasion-title">Shop by Occasion</h2>
+
+    <div class="slider-container">
+
+        <button class="slide-btn left" onclick="scrollOccasion(-1)">❮</button>
+
+        <div class="occasion-scroll" id="occasionScroll">
+
+            <a href="/occasion/birthday" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/birthday_banner.png') }}">
+            </a>
+
+            <a href="/occasion/anniversary" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/anniversary_banner.png') }}">
+            </a>
+
+            <a href="/occasion/wedding" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/wedding_banner.png') }}">
+            </a>
+
+            <a href="/occasion/getwellsoon" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/getwellsoon_banner.png') }}">
+            </a>
+
+            <a href="/occasion/sorry" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/sorry_banner.png') }}">
+            </a>
+
+            <a href="/occasion/congratulations" class="occasion-card">
+                <img src="{{ url_for('static', filename='images/congratulations_banner.png') }}">
+            </a>
+
+        </div>
+
+
+
+        <button class="slide-btn right" onclick="scrollOccasion(1)">❯</button>
+
+    </div>
+
+</div>
+
+<div class="trending-section">
+
+    <h2 class="trending-title">Trending Bouquets</h2>
+
+    <div class="trending-container">
+
+        <a href="/product/sunflower" class="trending-link">
+            <div class="trending-card">
+
+                <img src="{{ url_for('static', filename='images/sunflower bouquet home page.png') }}">
+
+                <h4>Sunflower Bouquet</h4>
+                <p>₹600</p>
+
+            </div>
+        </a>
+
+        <a href="/product/lily" class="trending-link">
+            <div class="trending-card">
+
+                <img src="{{ url_for('static', filename='images/lily bouquet home page.png') }}">
+
+                <h4>Lily Bouquet</h4>
+                <p>₹700</p>
+
+            </div>
+        </a>
+
+        <a href="/product/rose" class="trending-link">
+            <div class="trending-card">
+
+                <img src="{{ url_for('static', filename='images/red rose bouquet home page.png') }}">
+
+                <h4>Red Rose Bouquet</h4>
+                <p>₹300</p>
+
+            </div>
+        </a>
+
+        <a href="/product/orchids" class="trending-link">
+            <div class="trending-card">
+
+                <img src="{{ url_for('static', filename='images/orchids bouquet home page.png') }}">
+
+                <h4>Orchids Bouquet</h4>
+                <p>₹700</p>
+
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- BOUQUET SECTION -->
+<div class="bouquet-section">
+
+    <div class="container">
+
+        <h2 class="section-title">Pick Their Favourite Bouquet!!</h2>
+
+        <div class="row text-center mt-4">
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='rose') }}" style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/red rose bouquet home page.png') }}"
+                            class="bouquet-img">
+                        <h5>Rose Bouquet</h5>
+                        <p class="price">Rs 300/-</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='tulip') }}" style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/tulip bouquet home page.png') }}"
+                            class="bouquet-img">
+                        <h5>Tulip Bouquet</h5>
+                        <p class="price">Rs 400/-</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='sunflower') }}"
+                        style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/sunflower bouquet home page.png') }}"
+                            class="bouquet-img">
+                        <h5>Sunflower Bouquet</h5>
+                        <p class="price">Rs 600/-</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row text-center mt-4">
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='orchids') }}" style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/orchids bouquet home page.png') }}"
+                            class="bouquet-img">
+                        <h5>Orchids Bouquet</h5>
+                        <p class="price">Rs 700/-</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='lily') }}" style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/lily bouquet home page.png') }}"
+                            class="bouquet-img">
+                        <h5>Lily Bouquet</h5>
+                        <p class="price">Rs 700/-</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bouquet-card">
+                    <a href="{{ url_for('product', product_id='daisy') }}" style="text-decoration:none;color:black;">
+                        <img src="{{ url_for('static', filename='images/daisy bouquet.png') }}" class="bouquet-img">
+                        <h5>Daisy Bouquet</h5>
+                        <p class="price">Rs 600/-</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-4">
+    <a href="/shop">
+        <button class="see-more-btn">See More →</button>
+    </a>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DIY BOUQUET SECTION -->
+
+<div id="diy-section" class="diy-section">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6 text-center">
+                <img src="{{ url_for('static', filename='images/diy image.png') }}" class="diy-img">
+            </div>
+
+            <div class="col-md-6">
+
+                <h2 class="diy-title">Design your own Bouquet!!</h2>
+
+                <p class="diy-text">
+                    Start creating your personalized bouquet
+                </p>
+
+                <a href="/diy">
+                    <button class="diy-btn">DIY IT →</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}

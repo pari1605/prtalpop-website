@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-4">Admin Panel</h2>
+
+    <div class="alert alert-info text-center mb-4">
+        <strong>Total Products:</strong> {{ products|length }}
+    </div>
+
+    <a href="/add_product" class="btn btn-success mb-3">Add Product</a>
+
+    <!-- PRODUCT TABLE -->
+
+    <table class="table table-bordered table-striped text-center">
+
+        <thead class="table-danger">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for product in products %}
+
+            <tr>
+
+                <td>
+                    <img src="{{ url_for('static', filename=product.image if 'images/' in product.image else 'images/' + product.image) }}"
+                        width="80">
+                </td>
+
+                <td>{{ product.name }}</td>
+
+                <td>₹{{ product.price }}</td>
+
+                <td>
+
+                    <form action="/edit_price/{{ product.id }}" method="POST">
+                        <input type="number" name="price" placeholder="New Price">
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <a href="/delete_product/{{ product.id }}">
+                        <button>Delete</button>
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <!-- ORDER TABLE -->
+
+    <h3 class="mt-5">Customer Orders</h3>
+
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Pincode</th>
+                <th>Payment</th>
+                <th>Products</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for order in orders %}
+
+            <tr>
+
+                <td>{{ order.name }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.address }}</td>
+                <td>{{ order.pincode }}</td>
+                <td>{{ order.payment }}</td>
+
+                <td>
+
+                    {{ order.products }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

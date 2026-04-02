@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-5">
+        Recommended Flowers
+    </h2>
+
+    <div class="row text-center">
+
+        {% if recommended %}
+
+        {% for product in recommended %}
+
+        <div class="col-md-3 mb-4">
+
+            <a href="/product/{{ product.id }}" style="text-decoration:none;color:black">
+
+                <img src="{{ url_for('static', filename=product.image if product.image.startswith('images/') else 'images/' + product.image) }}"
+                    class="img-fluid mb-2">
+                <h5>{{ product.name }}</h5>
+
+                <p>Rs {{ product.price }}/-</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div class="text-center">
+
+            <h5>No products found for this selection.</h5>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

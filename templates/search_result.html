@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Search results for "{{ query }}"</h2>
+
+    <div class="row mt-4">
+
+        {% for p in results %}
+
+        <div class="col-md-3 text-center">
+
+            <a href="/product/{{ p.id }}">
+
+                <img src="{{ url_for('static', filename=p.image) }}" width="200">
+
+                <h5>{{ p.name }}</h5>
+
+                <p>₹{{ p.price }}</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

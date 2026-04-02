@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="cashbackPopup" class="cashback-popup">
+    🎉 Cashback Earned ₹{{ session.get('cashback', 0) }}
+</div>
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-5">My Orders</h2>
+
+    {% for order in orders %}
+    {% for item in order["items"] %}
+
+    {% set uid = range(100000) | random %}
+
+    <div class="card mb-4 shadow-sm" style="border-radius:15px;">
+
+        <div class="card-body d-flex justify-content-between align-items-center">
+
+            <!-- LEFT -->
+            <div class="d-flex align-items-center gap-3">
+
+                <img src="{{ url_for('static', filename=item.image) }}"
+                    style="width:90px; height:90px; object-fit:cover; border-radius:10px;">
+
+                <div>
+                    <h5 class="mb-1">{{ item.name }}</h5>
+                    <p class="text-muted mb-1">₹{{ item.price }} × {{ item.qty }}</p>
+                </div>
+
+                <div style="font-size:14px; margin-top:5px;">
+
+                    <p>🧾 Total: ₹{{ order.total }}</p>
+
+                    {% if order.wallet_used > 0 %}
+                    <p style="color:#ff4d6d;">
+                        💖 Wallet Used: ₹{{ order.wallet_used }}
+                    </p>
+
+                    <p style="color:#555;">
+                        💰 Paid Online: ₹{{ order.total - order.wallet_used }}
+                    </p>
+                    {% else %}
+                    <p style="color:#555;">
+                        💰 Paid Online: ₹{{ order.total }}
+                    </p>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="text-end">
+
+                <p class="text-success fw-bold mb-2">✔ Placed</p>
+
+                <button onclick="toggleDetails('details-{{ uid }}')">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- HIDDEN DETAILS -->
+        <div id="details-{{ uid }}" style="display:none;">
+            <p><b>📍 Address:</b> {{ order.address }}</p>
+            <p><b>👤 Name:</b> {{ order.name }}</p>
+            <p><b>💳 Payment:</b> {{ order.payment }}</p>
+            <p><b>📞 Phone:</b> {{ order.phone }}</p>
+        </div>
+
+    </div>
+
+    {% endfor %}
+    {% endfor %}
+
+</div>
+
+<!-- 💥 CASHBACK SCRIPT -->
+<script>
+    window.onload = function () {
+        let cashback = {{ session.get('cashback', 0)
+    }};
+    if (cashback > 0) {
+        let popup = document.getElementById("cashbackPopup");
+        popup.style.display = "block";
+
+        setTimeout(() => {
+            popup.style.display = "none";
+        }, 3000);
+    }
+    };
+</script>
+
+{% endblock %}

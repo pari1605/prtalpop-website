@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="shop-banner"></div>
+
+
+<!-- SHOP CATEGORY -->
+
+<div class="shop-category-section">
+
+    <h2 class="shop-title">View all</h2>
+
+    <div class="shop-category-container">
+
+        <a href="#flowers" class="shop-category-card hover-card"> <img
+                src="{{ url_for('static', filename='images/DIY Bouquet.png') }}">
+            <p>Fresh Flowers Collection</p>
+        </a>
+
+        <a href="#cakes" class="shop-category-card hover-card"> <img
+                src="{{ url_for('static', filename='images/strawberry cake.jpeg') }}">
+            <p>Bento Cakes</p>
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- BOUQUETS -->
+
+<div class="container">
+    <h3 id="flowers" class="section-title">Pick Their Favourite Bouquet!!</h3>
+
+    <div class="row text-center mt-4">
+
+        {% for p in bouquets %}
+        <div class="col-md-3 hover-card">
+
+            <a href="/product/{{ p.id }}" style="text-decoration:none; color:black;">
+
+                <img src="{{ url_for('static', filename=p.image if p.image.startswith('images/') else 'images/' + p.image) }}"
+                    class="product-img">
+                <p>{{ p.name }}</p>
+
+                <p class="price">Rs {{ p.price }}/-</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<!-- SPECIAL BENTO CAKES -->
+
+<div class="container text-center bento-section">
+
+    <h2 id="cakes" class="section-title">Special Bento Cakes</h2>
+
+    <div class="row justify-content-center mt-4">
+
+        {% for p in cakes %}
+
+        <div class="col-md-3 hover-card">
+
+            <a href="/product/{{ p.id }}" style="text-decoration:none; color:black;">
+                <img src="{{ url_for('static', filename=p.image if p.image.startswith('images/') else 'images/' + p.image) }}"
+                    class="cake-img">
+
+                <p>{{ p.name }}</p>
+                <p class="price">Rs {{ p.price }}/-</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+<!-- SPECIAL COMBOS -->
+
+<div class="container text-center combos-section">
+
+    <h2 class="section-title">Special Combos</h2>
+
+    <div class="row justify-content-center mt-4">
+
+        {% for p in combos %}
+
+        <div class="col-md-3 combo-card hover-card">
+
+            <a href="/product/{{ p.id }}" style="text-decoration:none; color:black;">
+
+                <img src="{{ url_for('static', filename=p.image if p.image.startswith('images/') else 'images/' + p.image) }}"
+                    class="combo-img">
+
+                <p class="combo-name">{{ p.name }}</p>
+                <p class="price">Rs {{ p.price }}/-</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

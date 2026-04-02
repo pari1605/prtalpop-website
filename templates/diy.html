@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger">DIY Bouquet</h2>
+
+    <p class="text-center">
+        Handpick Happiness for Them
+    </p>
+
+    <div class="text-center mb-5">
+        <button class="btn btn-danger" onclick="scrollToFlowers()">
+            Start Designing
+        </button>
+    </div>
+
+
+    <!-- FLOWER SECTION -->
+
+    <div id="flowers" class="section-box">
+
+        <h4 class="text-center mb-4">Choose desirable flowers</h4>
+
+        <div class="row text-center">
+
+            <div class="col-md-2 flower-card" onclick="addFlower('rose')">
+                <img src="{{ url_for('static', filename='images/red rose single.png') }}">
+                <p>Rose</p>
+                <span id="rose-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('tulip')">
+                <img src="{{ url_for('static', filename='images/tulip single.png') }}">
+                <p>Tulip</p>
+                <span id="tulip-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('sunflower')">
+                <img src="{{ url_for('static', filename='images/sunfower single.png') }}">
+                <p>Sunflower</p>
+                <span id="sunflower-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('orchids')">
+                <img src="{{ url_for('static', filename='images/orchids single.png') }}">
+                <p>Orchids</p>
+                <span id="orchids-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('lily')">
+                <img src="{{ url_for('static', filename='images/lily single.png') }}">
+                <p>Lily</p>
+                <span id="lily-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('daisy')">
+                <img src="{{ url_for('static', filename='images/daisy single.png') }}">
+                <p>Daisy</p>
+                <span id="daisy-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('lavender')">
+                <img src="{{ url_for('static', filename='images/lavender single.png') }}">
+                <p>Lavender</p>
+                <span id="lavender-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('jasmine')">
+                <img src="{{ url_for('static', filename='images/Jasmine single.png') }}">
+                <p>Jasmine</p>
+                <span id="jasmine-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('carnation')">
+                <img src="{{ url_for('static', filename='images/carnation single.png') }}">
+                <p>Carnation</p>
+                <span id="carnation-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('pinkrose')">
+                <img src="{{ url_for('static', filename='images/pink rose single.png') }}">
+                <p>Pink Rose</p>
+                <span id="pinkrose-count" class="flower-count">0</span>
+            </div>
+
+            <div class="col-md-2 flower-card" onclick="addFlower('yellowrose')">
+                <img src="{{ url_for('static', filename='images/yellow rose single.png') }}">
+                <p>Yellow Rose</p>
+                <span id="yellowrose-count" class="flower-count">0</span>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" onclick="scrollToWrap()">
+                Next
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- WRAP SECTION -->
+
+    <div id="wraps" class="section-box">
+
+        <h4 class="text-center mb-4">Choose Bouquet Style</h4>
+
+        <div class="row text-center">
+
+            <div class="col-md-3 wrap-card" onclick="selectWrap('Classic Wrap')">
+                <img src="{{ url_for('static', filename='images/classic wrap (2).png') }}">
+                <p>Classic Wrap</p>
+            </div>
+
+            <div class="col-md-3 wrap-card" onclick="selectWrap('Rustic Wrap')">
+                <img src="{{ url_for('static', filename='images/rustic wrap.png') }}">
+                <p>Rustic Wrap</p>
+            </div>
+
+            <div class="col-md-3 wrap-card" onclick="selectWrap('Premium Wrap')">
+                <img src="{{ url_for('static', filename='images/premium wrap.png') }}">
+                <p>Premium Wrap</p>
+            </div>
+
+            <div class="col-md-3 wrap-card" onclick="selectWrap('Plastic Wrap')">
+                <img src="{{ url_for('static', filename='images/plastic wrap.png') }}">
+                <p>Plastic Wrap</p>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" onclick="showPreview()">
+                Done
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <!-- PREVIEW SECTION -->
+
+    <div id="preview-section" class="section-box">
+
+        <h4>Your Bouquet</h4>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div id="bouquet-preview" class="bouquet-preview">
+
+                    <img id="wrap-preview" class="wrap-preview">
+
+                    <div id="flower-layer"></div>
+
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <h5>Selected Flowers</h5>
+                <p id="flower-summary"></p>
+
+                <h5>Selected Wrap</h5>
+                <p id="wrap-summary"></p>
+
+                <h5>Price Summary</h5>
+
+                <p>Flowers: ₹<span id="flower-price"></span></p>
+                <p>Wrap: ₹200</p>
+                <p>Delivery: ₹50</p>
+
+                <h5>Total: ₹<span id="total-price"></span></h5>
+
+                <button class="btn btn-danger mt-3" onclick="addBouquetToCart()">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        let flowers = {
+            rose: 0,
+            tulip: 0,
+            sunflower: 0,
+            orchids: 0,
+            lily: 0,
+            daisy: 0,
+            lavender: 0,
+            jasmine: 0,
+            carnation: 0,
+            pinkrose: 0,
+            yellowrose: 0
+        };
+        let selectedWrap = "";
+
+        let flowerPrices = {
+            rose: 50,
+            tulip: 80,
+            sunflower: 100,
+            orchids: 120,
+            lily: 90,
+            daisy: 60,
+            lavender: 70,
+            jasmine: 40,
+            carnation: 50,
+            pinkrose: 50,
+            yellowrose: 50
+        };
+
+
+        function scrollToFlowers() {
+
+            document.getElementById("flowers").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function scrollToWrap() {
+
+            document.getElementById("wraps").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function addFlower(name) {
+
+            flowers[name]++;
+
+            document.getElementById(name + "-count").innerText = flowers[name];
+
+        }
+
+
+        function selectWrap(name) {
+
+            selectedWrap = name;
+
+            let wraps = document.querySelectorAll(".wrap-card");
+
+            wraps.forEach(w => w.classList.remove("selected-wrap"));
+
+            event.currentTarget.classList.add("selected-wrap");
+
+        }
+
+
+        function showPreview() {
+
+            let preview = document.getElementById("preview-section");
+
+            preview.style.display = "block";
+
+            let summary = "";
+            let totalFlowers = 0;
+            let flowerPriceTotal = 0;
+
+            let flowerLayer = document.getElementById("flower-layer");
+            flowerLayer.innerHTML = "";
+
+            /* show selected wrap */
+
+            let wrapImage = document.getElementById("wrap-preview");
+
+            if (selectedWrap === "Classic Wrap") {
+                wrapImage.src = "/static/images/classic wrap (2).png";
+            }
+
+            if (selectedWrap === "Rustic Wrap") {
+                wrapImage.src = "/static/images/rustic wrap.png";
+            }
+
+            if (selectedWrap === "Premium Wrap") {
+                wrapImage.src = "/static/images/premium wrap.png";
+            }
+
+            if (selectedWrap === "Plastic Wrap") {
+                wrapImage.src = "/static/images/plastic wrap.png";
+            }
+
+
+            /* add flowers */
+
+            let allFlowers = [];
+
+            for (let f in flowers) {
+
+                if (flowers[f] > 0) {
+                    summary += f + " x " + flowers[f] + "<br>";
+                }
+
+                // ✅ ADD PRICE CALCULATION
+                flowerPriceTotal += flowers[f] * flowerPrices[f];
+
+                for (let i = 0; i < flowers[f]; i++) {
+
+                    let img = document.createElement("img");
+
+                    if (f === "rose") img.src = "/static/images/red rose single.png";
+                    if (f === "tulip") img.src = "/static/images/tulip single.png";
+                    if (f === "sunflower") img.src = "/static/images/sunfower single.png";
+                    if (f === "orchids") img.src = "/static/images/orchids single.png";
+                    if (f === "lily") img.src = "/static/images/lily single.png";
+                    if (f === "daisy") img.src = "/static/images/daisy single.png";
+
+                    if (f === "lavender") img.src = "/static/images/lavender single.png";
+                    if (f === "jasmine") img.src = "/static/images/Jasmine single.png";
+                    if (f === "carnation") img.src = "/static/images/carnation single.png";
+                    if (f === "pinkrose") img.src = "/static/images/pink rose single.png";
+                    if (f === "yellowrose") img.src = "/static/images/yellow rose single.png";
+
+                    allFlowers.push(img);
+
+                }
+
+            }
+
+            document.getElementById("flower-summary").innerHTML = summary;
+
+            document.getElementById("wrap-summary").innerText = selectedWrap;
+
+            document.getElementById("flower-price").innerText = flowerPriceTotal;
+
+            let totalPrice = flowerPriceTotal + 200 + 50;
+
+            document.getElementById("total-price").innerText = totalPrice;
+
+            let total = allFlowers.length;
+
+            if (total === 1) {
+                allFlowers[0].style.left = "100px";
+                allFlowers[0].style.bottom = "0px";
+                flowerLayer.appendChild(allFlowers[0]);
+                return;
+            }
+
+
+
+            // dynamic radius so flowers spread
+            let radius = 90;
+            let centerX = 130;
+
+            if (total < 4) {
+                radius = 50;
+            }
+
+            if (total >= 4 && total <= 7) {
+                radius = 70;
+            }
+
+            if (total > 7) {
+                radius = 90;
+            }
+
+            for (let i = 0; i < total; i++) {
+
+                let angle = Math.PI * (i / (total - 1));
+
+                let x = centerX + radius * Math.cos(angle) - 30;
+
+                let y = 40 + radius * Math.sin(angle);   // pushes flowers downward
+
+                let img = allFlowers[i];
+
+                img.style.left = x + "px";
+                img.style.bottom = y + "px";
+
+                flowerLayer.appendChild(img);
+            }
+        }
+
+        function addBouquetToCart() {
+
+            let selected = {};
+
+            for (let f in flowers) {
+                if (flowers[f] > 0) {
+                    selected[f] = flowers[f];
+                }
+            }
+
+            fetch("/add_diy_to_cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    flowers: selected,
+                    wrap: selectedWrap
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Bouquet added to cart 🌸");
+                    window.location.href = "/cart";
+                });
+        }
+
+    </script>
+
+    {% endblock %}

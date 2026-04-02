@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row align-items-center">
+
+        <!-- Product Image -->
+        <div class="col-md-5 text-center">
+            <img src="{{ url_for('static', filename=product.image if product.image.startswith('images/') else 'images/' + product.image) }}"
+                class="product-main-img" style="max-width:420px; width:100%; height:auto;">
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-7">
+
+            <h2 class="text-danger">{{ product.name }}</h2>
+
+            <h4>Rs {{ product.price }}/-</h4>
+
+            <p>{{ product.short_desc }}</p>
+
+            <!-- Quantity -->
+            <div class="d-flex align-items-center mb-3">
+
+                <button class="btn btn-outline-danger" onclick="decreaseQty()">-</button>
+
+                <span id="qty" class="mx-3">1</span>
+
+                <button class="btn btn-outline-danger" onclick="increaseQty()">+</button>
+
+            </div>
+
+            <a id="cartBtn" href="{{ url_for('add_to_cart', product_id=product.id) }}">
+                <button class="btn btn-danger me-3">Add to Cart</button>
+            </a>
+            <a id="buyNowBtn" href="{{ url_for('buy_now', product_id=product.id) }}">
+                <button class="btn btn-outline-danger">Buy Now</button>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Product Details Section -->
+
+<div class="container mt-5">
+
+    <h4>Product Description</h4>
+
+    <p>{{ product.description }}</p>
+
+
+    <h4 class="mt-4">Product Specifications</h4>
+
+    {% if product.specifications is string %}
+    {% for item in product.specifications.split(',') %}
+    <li>{{ item }}</li>
+    {% endfor %}
+    {% else %}
+    {% for key, value in product.specifications.items() %}
+    <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+    {% endif %}
+
+
+    <h4 class="mt-4">Delivery Information</h4>
+
+    <ul>
+        <li>Same-day delivery available in select locations</li>
+        <li>Carefully packed to maintain freshness</li>
+    </ul>
+
+
+    <h4 class="mt-4">Care Instructions</h4>
+
+    <ul>
+        <li>Trim the stems slightly before placing them in water</li>
+        <li>Change the water every 1–2 days</li>
+        <li>Keep the bouquet away from direct sunlight and heat</li>
+    </ul>
+
+</div>
+
+
+
+<!-- Related Products -->
+
+<div class="container text-center mt-5">
+
+    <h2 class="section-title">Related Products</h2>
+
+    <div class="row justify-content-center mt-4">
+
+        {% for item in related_products %}
+
+        <div class="col-md-3 hover-card">
+
+            <a href="{{ url_for('product', product_id=item.id) }}" style="text-decoration:none;color:black">
+
+                <img src="{{ url_for('static', filename=item.image if item.image.startswith('images/') else 'images/' + item.image) }}"
+                    class="product-img">
+                <p>{{ item.name }}</p>
+
+                <p class="price">Rs {{ item.price }}/-</p>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+
+    let qty = 1;
+
+    function increaseQty() {
+        qty++;
+        document.getElementById("qty").innerText = qty;
+        updateCartLink();
+        updateBuyNowLink();
+    }
+
+    function decreaseQty() {
+        if (qty > 1) {
+            qty--;
+            document.getElementById("qty").innerText = qty;
+            updateCartLink();
+            updateBuyNowLink();
+        }
+    }
+
+    function updateCartLink() {
+        let btn = document.getElementById("cartBtn");
+        btn.href = "{{ url_for('add_to_cart', product_id=product.id) }}?qty=" + qty;
+    }
+
+    function updateBuyNowLink() {
+        let btn = document.getElementById("buyNowBtn");
+        btn.href = "/buy_now/{{ product.id }}?qty=" + qty;
+    }
+
+    updateCartLink();
+    updateBuyNowLink();
+
+
+
+</script>
+
+{% endblock %}

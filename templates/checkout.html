@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-5">Checkout</h2>
+
+    <div class="row">
+
+        <!-- ADDRESS -->
+
+        <div class="col-md-6">
+
+            <h4>Delivery Address</h4>
+
+            <form action="/confirm_order" method="POST">
+                <input type="text" name="name" placeholder="Full Name" class="form-control mb-3" required>
+
+                <input type="text" name="phone" placeholder="Phone Number" class="form-control mb-3" required>
+
+                <input type="text" name="pincode" placeholder="Pincode" class="form-control mb-3" required>
+
+                <textarea name="address" placeholder="Full Address" class="form-control mb-3" required></textarea>
+
+                <select name="payment" class="form-control mb-3">
+                    <option value="cod">Cash on Delivery</option>
+                    <option value="online">Online Payment</option>
+                </select>
+
+                <button class="btn btn-danger mt-3">
+                    Confirm Order
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="col-md-6">
+
+            <h4>Order Summary</h4>
+
+            {% for item in items %}
+
+            <div class="d-flex justify-content-between mb-2">
+
+                <span>{{ item.name }} × {{ item.qty }}</span>
+                <span>Rs {{ item.subtotal }}</span>
+
+            </div>
+
+            {% endfor %}
+
+            <hr>
+
+            <h5>Total: Rs {{ total }}</h5>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

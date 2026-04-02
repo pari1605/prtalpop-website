@@ -1,0 +1,53 @@
+<h2>Add Product</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <label>Product Name</label>
+    <input type="text" name="name" required>
+
+    <br><br>
+
+    <label>Price</label>
+    <input type="number" name="price" required>
+
+    <br><br>
+
+    <input type="text" name="short_desc" placeholder="Short Description" required>
+
+    <textarea name="description" placeholder="Product Description" rows="4" required></textarea>
+
+    <textarea name="specifications" placeholder="Specifications (one per line)" rows="5"></textarea>
+
+    <br><br>
+
+    <label>Category</label>
+    <select name="category" required>
+        <option value="">Select Category</option>
+        <option value="bouquet">Bouquet</option>
+        <option value="cake">Cake</option>
+        <option value="combo">Combo</option>
+    </select>
+
+    <br><br>
+
+    <label>Occasion</label><br>
+
+    <select name="occasion" multiple style="height:120px;">
+        <option value="birthday">Birthday</option>
+        <option value="anniversary">Anniversary</option>
+        <option value="sorry">Sorry</option>
+        <option value="congratulations">Congratulations</option>
+        <option value="getwellsoon">Get Well Soon</option>
+        <option value="wedding">Wedding</option>
+    </select>
+
+    <br><br>
+
+    <label>Upload Image</label>
+    <input type="file" name="image" required>
+
+    <br><br>
+
+    <button type="submit">Add Product</button>
+
+</form>

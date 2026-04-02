@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center text-danger mb-5">My Cart</h2>
+
+    {% for item in items %}
+
+    <div class="cart-card d-flex align-items-center justify-content-between mb-4">
+
+        <div class="d-flex align-items-center">
+
+            <img src="{{ url_for('static', filename=item.image) }}" class="cart-img">
+
+            <div class="ms-4">
+                <h5>{{ item.name }}</h5>
+
+                {% if item.flowers %}
+                <p>🌸 Flowers: {{ item.flowers }}</p>
+                <p>🎀 Wrap: {{ item.wrap }}</p>
+                {% endif %}
+
+                <p>Price: Rs {{ item.price }}/-</p>
+
+                <p>Subtotal: Rs {{ item.subtotal }}/-</p>
+            </div>
+
+        </div>
+
+        <div class="d-flex align-items-center">
+
+            <div class="quantity-box me-3">
+
+                <a href="{{ url_for('decrease', product_id=item.id) }}">
+                    <button>-</button>
+                </a>
+
+                <span>{{ item.qty }}</span>
+
+                <a href="{{ url_for('increase', product_id=item.id) }}">
+                    <button>+</button>
+                </a>
+
+            </div>
+
+            <a href="{{ url_for('remove', product_id=item.id) }}" class="trash-btn">
+                🗑
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    <h4 class="mt-5">Price Summary</h4>
+
+    <div class="price-summary">
+
+        <p>Order total <span>Rs {{ total }}/-</span></p>
+        <p>Delivery <span>Rs 100/-</span></p>
+
+        <hr>
+
+        <h5>Total <span>Rs {{ total + 100 }}/-</span></h5>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/checkout" class="btn btn-danger px-5">
+            Place Order
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <!-- 💰 WALLET CARD -->
+    <div class="card shadow-lg p-4 text-center" style="max-width:450px; margin:auto; border-radius:20px;">
+
+        <h4 class="text-muted">PetalPop Wallet</h4>
+
+        <h2 class="fw-bold mt-3" style="font-size:40px;">
+            ₹{{ balance }}
+        </h2>
+
+        <p class="text-muted mb-4">Available Balance</p>
+
+        <!-- BUTTON -->
+        <a href="/add_money" class="btn btn-danger w-100" style="border-radius:10px;">
+            + Add Money
+        </a>
+
+    </div>
+
+    <!-- ✨ FEATURES -->
+    <div class="mt-5 text-center">
+
+        <h5 class="mb-4 text-danger">Why use Wallet?</h5>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <p>⚡ Instant Payments</p>
+            </div>
+
+            <div class="col-md-4">
+                <p>🎁 Cashback Rewards</p>
+            </div>
+
+            <div class="col-md-4">
+                <p>💸 Faster Checkout</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
